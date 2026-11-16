@@ -31,7 +31,7 @@ h1 { color: #7b351d; }
 a { color: #9a431f; }
 li { margin: .55rem 0; }
 .muted { color: #70635b; }
-.card { max-width: 620px; padding: 1.5rem; border: 1px solid #ead8c4; border-radius: 12px; background: #fff; box-shadow: 0 8px 24px #4a2c1710; }
+.card { max-width: 620px; padding: 1.5rem; border: 1px solid white; border-radius: 12px; background: #fff; box-shadow: 0 8px 24px #4a2c1710; }
 .tags { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; list-style: none; }
 .tags li { margin: 0; padding: .3rem .65rem; border-radius: 999px; background: #f5e5d2; color: #713017; }
 .total { font-size: 1.25rem; font-weight: 700; }
