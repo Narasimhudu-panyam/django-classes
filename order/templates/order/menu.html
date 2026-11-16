@@ -1,0 +1,14 @@
+{% extends "order/base.html" %}
+{% block title %}Menu | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Our Menu</h1>
+    <p class="muted">{{ dishes|length }} dish{{ dishes|length|pluralize:"es" }} today</p>
+    <ul>
+        {% for dish in dishes %}
+            <li><a href="{% url 'dish' dish.id %}">{{ dish.name }}</a> - Rs {{ dish.price }}</li>
+        {% empty %}
+            <li>No dishes are available right now.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
