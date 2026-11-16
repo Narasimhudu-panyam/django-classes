@@ -1,6 +1,5 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
-from django.urls import reverse
 
 
 DISHES = {
@@ -23,17 +22,14 @@ HOURS = {
 
 
 def home(request):
-    menu_items= reverse("menu")
-    return HttpResponse(f"welcome to the onepiece cafe! <a href='{menu_items}'>Menu</a>")
+    return render(request, "order/home.html")
 
 
 def dish(request, dish_id):
-    dish = DISHES.get(dish_id)
-    if dish_id  not in DISHES:
+    selected_dish = DISHES.get(dish_id)
+    if selected_dish is None:
         raise Http404("we dont have the dish you are looking for")
-    name = DISHES[dish_id]["name"]
-    price = DISHES[dish_id]["price"]
-    return HttpResponse(f"{name} costs  is {price}")
+    return render(request, "order/dish.html", {"dish": selected_dish})
 
  
 def hello(request):
@@ -42,7 +38,8 @@ def hello(request):
 
 
 def hello_name(request, name):
-    return HttpResponse(f"Hello, {name}!")
+    return render(request, "order/name.html", {"name": name})
+
 
 
 def menu_page(request):
@@ -50,10 +47,10 @@ def menu_page(request):
     return render(request,"order/menu.html",{"dishes":dishes})
 
 def about(request):
-    return HttpResponse("This is a cafe where you can order your favorite dishes online.there is lots of variety of dishes available here. We are open from 9:00am to 9:00pm. Enjoy your meal!")
+    return render(request, "order/about.html")
 
 def service(request):
-    return HttpResponse("We provide home delivery service for your convenience. You can place your order online and we will deliver it to your doorstep. Enjoy our delicious dishes from the comfort of your home!")
+    return render(request, "order/service.html")
 
 
 def bill(request, dish_id, qty):
@@ -61,10 +58,11 @@ def bill(request, dish_id, qty):
         raise Http404("Dish not found")
     dish = DISHES[dish_id]
     total = qty * dish["price"]
-    return HttpResponse(
-        f"<h1>Bill</h1><p>{dish['name']}: {qty} x Rs {dish['price']} = Rs {total}</p>"
-        "<p>Thank you for ordering from our cafe!</p>"
-    )
+    return render(request, "order/bill.html", {
+        "dish": dish,
+        "qty": qty,
+        "total": total
+    })
 
 
 def shout(request,word):

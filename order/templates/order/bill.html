@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill | One Piece Cafe</title>
+</head>
+<body>
+    <h1>Your bill</h1>
+    <p>{{ qty }} x {{ dish.name}}</p>
+    <p>Price per dish: Rs {{ dish.price }}</p>
+    <p>Total: Rs {{ total }}</p>
+    <a href="{% url 'menu' %}">Back to menu</a>
+</body>
+</html>

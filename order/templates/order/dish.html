@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ dish.name }}</title>
+</head>
+<body>
+    <h1>{{ dish.name }}</h1>
+    <p>Price: Rs {{ dish.price }}</p>
+    <p>{{ dish.about }}</p>
+
+    <h2>Tags</h2>
+    <ul>
+        {% for tag in dish.tag %}
+            <li>{{ tag|title }}</li>
+        {% empty %}
+            <li>No tags available.</li>
+        {% endfor %}
+    </ul>
+
+    <p>{% if dish.veg %}Vegetarian{% else %}Non-vegetarian{% endif %}</p>
+</body>
+</html>

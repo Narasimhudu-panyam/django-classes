@@ -1,0 +1,9 @@
+{% extends "order/base.html" %}
+
+{% block title %}Home | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Welcome to One Piece Cafe</h1>
+    <p>Enjoy a variety of delicious dishes made for you.</p>
+    <a class="button" href="{% url 'menu' %}">Explore our menu</a>
+{% endblock %}

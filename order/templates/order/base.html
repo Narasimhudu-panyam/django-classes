@@ -4,26 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Cafe Order{% endblock %}</title>
+    <title>{% block title %}One Piece Cafe{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'order/style.css' %}">
-    <link rel="icon" href="{% static 'order/logo.svg' %}" >
+    <link rel="icon" type="image/jpeg" href="{% static 'order/logo.jpg' %}">
 </head>
 <body>
     <header class="top">
         <a href="{% url 'home' %}" class="brand">
-            <img src="{% static 'order/logo.jpg' %}" alt="" width="34" height="34"> namma cafe
+            <img src="{% static 'order/logo.jpg' %}" alt="One Piece Cafe logo" width="34" height="34"> One Piece Cafe
         </a>
         <nav>
-            <a href="{% url 'menu' %}">Menu</a>
+            <a href="{% url 'menu' %}">Our Menu</a>
             <a href="{% url 'about' %}">About</a>
             <a href="{% url 'service' %}">Service</a>
             
         </nav>
     </header>
-      <main>
+      <main class="{% block main_class %}{% endblock %}">
         {% block content %}
         {% endblock %}
       </main>
-      <footer>namma cafe,{% now "Y" %}</footer>
+      <footer>One Piece Cafe, {% now "Y" %}</footer>
     </body>
 </html>
