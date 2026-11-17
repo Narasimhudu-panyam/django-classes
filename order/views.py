@@ -1,5 +1,6 @@
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.urls import reverse
 
 
 DISHES = {
@@ -68,4 +69,14 @@ def bill(request, dish_id, qty):
 def shout(request,word):
     return HttpResponse(f"<h1>Shout</h1><p>{word}!</p>")
  
- 
+
+def order_page(request):
+    if request.method == "POST":
+        dish_id = int(request.POST.get("dish_id", 0))
+        qty = int(request.POST.get("qty", 0))
+
+        if dish_id not in DISHES:
+            raise Http404("Dish not found")
+
+        return redirect("bill", dish_id=dish_id, qty=qty)
+    return render(request, "order/place_order.html")

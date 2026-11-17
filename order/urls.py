@@ -11,4 +11,5 @@ urlpatterns = [
     path("service/", views.service, name="service"),
     path("bill/<int:dish_id>/<int:qty>/", views.bill, name="bill"),
     path("shout/<str:word>/", views.shout, name="shout"),
+    path("order/", views.order_page, name="order"),
 ]
