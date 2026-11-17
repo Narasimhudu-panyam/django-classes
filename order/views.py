@@ -72,6 +72,8 @@ def shout(request,word):
 
 def order_page(request):
     if request.method == "POST":
+        name = str(request.POST.get("name", ""))
+        print(name)
         dish_id = int(request.POST.get("dish_id", 0))
         qty = int(request.POST.get("qty", 0))
 
