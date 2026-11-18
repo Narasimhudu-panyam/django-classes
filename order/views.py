@@ -2,8 +2,10 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render,redirect
 from django.urls import reverse
 
+from .forms import OrderForm
 
-DISHES = {
+
+DISHES = { 
     1: {"name": "Pizza", "price": 100, "veg": True, "tag": ["italian", "fastfood"], "about": "Pizza is a popular Italian dish made with a round, flat base of dough topped with tomato sauce, cheese, and various toppings such as vegetables, meats, and herbs. It is baked in an oven until the crust is crispy and the cheese is melted and bubbly. Pizza is often served in slices and can be enjoyed as a quick snack or a full meal."},
     2: {"name": "Burger", "price": 60, "veg": False, "tag": ["american", "fastfood"], "about": "A burger is a popular American sandwich consisting of a cooked patty of ground meat, usually beef, placed inside a sliced bun. It is often served with various toppings such as lettuce, tomato, onion, and condiments."},
     3: {"name": "Pasta", "price": 75, "veg": True, "tag": ["italian"], "about": "Pasta is a staple food of traditional Italian cuisine. It is made from durum wheat semolina and water, formed into various shapes and then cooked in boiling water or broth."},
@@ -72,13 +74,11 @@ def shout(request,word):
 
 def order_page(request):
     if request.method == "POST":
-        name = str(request.POST.get("name", ""))
-        print(name)
-        dish_id = int(request.POST.get("dish_id", 0))
-        qty = int(request.POST.get("qty", 0))
+       form =OrderForm(request.POST)
+       if form.is_valid():
+           data = form.cleaned_data
+           return redirect("bill", dish_id=data["dish_id"], qty=data["quality"])
+    else:
+        form = OrderForm()
 
-        if dish_id not in DISHES:
-            raise Http404("Dish not found")
-
-        return redirect("bill", dish_id=dish_id, qty=qty)
-    return render(request, "order/place_order.html")
+    return render(request, "order/place_order.html", {"form": form})
